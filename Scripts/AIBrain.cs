@@ -20,6 +20,7 @@ public class AIBrain : MonoBehaviour {
     }
 	
 	void Update () {
+        // Restict thougths to a 1 second tick.
         if (Time.time > nextActionTime)
         {
             nextActionTime = Time.time + thinkTime;
@@ -37,12 +38,15 @@ public class AIBrain : MonoBehaviour {
 
         thoughList.Clear();
 
+        // Check every though in our list
+        
         for (int i = 0; i < thoughts.Count; i++)
         {
             haveThought = true;
             ThoughData thoughtData = new ThoughData();
             currentThought = Mathf.Clamp(thoughts[i].ReturnWeight(gameObject), 0, 100);
 
+            // Draw debug gui if needed.
             if (aiDebugGui)
             {
                 thoughtData.urge = currentThought;
@@ -50,6 +54,7 @@ public class AIBrain : MonoBehaviour {
                 thoughList.Add(thoughtData);
             }
 
+            // Work out which is the most urgent thought by finding the smallest.
             if (currentThought < lastThought)
             {
                 lastThought = currentThought;
@@ -60,6 +65,7 @@ public class AIBrain : MonoBehaviour {
 
         if (haveThought)
         {
+            // Execute the throught script by passing its owner to it.
             thoughts[strongestUrge].OnExecuteThought(gameObject);
         }
     }

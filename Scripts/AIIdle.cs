@@ -1,24 +1,23 @@
-﻿/*
- * Real simple example where the thought has no action. In this case if the actor has a target its urgency is 25% otherwise its 100% with no target.
- * 
- * 
- */
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 [CreateAssetMenu(fileName = "Idle", menuName = "AI/Idle", order = 0)]
-public class AIIdle : AIThoughtScriptable
-{
-    public override float ReturnWeight(GameObject owner)
+public class AIIdle : AIThoughtScriptable {
+
+    public override float ReturnWeight(GameObject owner)    
     {
-        NPCActor3D actor = owner.GetComponent<NPCActor3D>();
-        if (actor.currentTarget == null)
+        //base.OnExecuteThought(owner);
+        AIVision vision = owner.GetComponent<AIVision>();
+
+        if (vision.target == null)
         {
-            return 25.0f;
+            // have no target then we are 25% to be idleing. This is a bit basic but works in the example.
+            return 25f;
         } else
         {
-            return 100.0f;
+            // Have target so no longer idle. 
+            return 100f;
         }
+
     }
 }
