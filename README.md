@@ -17,6 +17,10 @@ Add the AI brain to your NPC's and then create your own thoughts by extending th
 When you create a new thought you need to also make a scriptable object based off it. This is what you add to your AI's brain.
 Each though has a curve which allows you adjust its urgency.
 
+## Licence
+
+You are free to use this in any project but if you find it helpful all I ask is you pop my name in the credits. 
+
 ## Todo
 
 Make a full example
